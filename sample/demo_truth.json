@@ -1,0 +1,22 @@
+{
+  "D221031": {
+    "effect": 2.0,
+    "compression": false
+  },
+  "D231031": {
+    "effect": 2.0,
+    "compression": false
+  },
+  "D232062": {
+    "effect": -2.0,
+    "compression": false
+  },
+  "D241031": {
+    "effect": 2.0,
+    "compression": false
+  },
+  "D242051": {
+    "effect": 0.0,
+    "compression": true
+  }
+}

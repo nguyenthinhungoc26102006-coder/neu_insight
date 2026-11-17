@@ -1,0 +1,18 @@
+NEU GRADE INTELLIGENCE - HUONG DAN CHAY TREN WINDOWS
+=================================================
+
+1. Cai Python 3.11+ (khuyen nghi Python 3.12).
+2. Giai nen file NEU_FIT_Web_Full_Source.zip.
+3. Vao thu muc NEU_FIT_Web, nhap dup START_WINDOWS.bat.
+4. Mo dia chi http://127.0.0.1:8000 trong Chrome/Edge.
+5. Nhan "Chay du lieu gia lap" de thu.
+6. Muon dung du lieu BTC: vao "Quan ly du lieu", chon Du_lieu.csv va
+   Thoi_khoa_bieu.csv (tuy chon), sau do bam "Bat dau phan tich 3 giai phap".
+7. Sau khi phan tich, vao 3 trang Giai phap 01 / 02 / 03 de xem.
+8. Tai cac bang CSV bang nut "Xuat" va API /api/download/... .
+
+NEU_FIT_Web/README.md co huong dan tieng Viet chi tiet va cac cong thuc.
+
+LUU Y: Du lieu BTC khong co san trong file ZIP de dam bao pham vi su dung.
+Khong dua file diem len GitHub cong khai hay dich vu ngoai cuoc thi.
+Web local (127.0.0.1), chua co authentication/RBAC.

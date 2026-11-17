@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light"><title>NEU Grade Intelligence · FIT Innovation 2026</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/vendor/plotly.min.js"></script>
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">N<span>✦</span></div><div><strong>NEU<span>·</span>Insight</strong><small>ACADEMIC INTELLIGENCE</small></div></div>
+    <div class="side-section">WORKSPACE</div>
+    <nav id="nav">
+      <button type="button" class="nav-item active" data-page="overview"><span class="nav-ico">◫</span> Tổng quan</button>
+      <button type="button" class="nav-item" data-page="anomalies"><span class="nav-ico">◎</span> Phát hiện bất thường <span class="nav-number">01</span></button>
+      <button type="button" class="nav-item" data-page="adjustments"><span class="nav-ico">⇄</span> Hiệu chỉnh điểm <span class="nav-number">02</span></button>
+      <button type="button" class="nav-item" data-page="students"><span class="nav-ico">♙</span> Hồ sơ năng lực <span class="nav-number">03</span></button>
+      <button type="button" class="nav-item" data-page="experiments"><span class="nav-ico">⌁</span> Đánh giá thuật toán</button>
+      <button type="button" class="nav-item" data-page="data"><span class="nav-ico">▤</span> Quản lý dữ liệu</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="private-box"><div class="private-title"><span class="dot-green"></span> Chạy cục bộ · Private</div>
+      <p>Điểm gốc luôn được giữ nguyên. Đề xuất hiệu chỉnh chỉ phục vụ phân tích.</p></div>
+      <div class="sidebar-foot">FIT INNOVATION 2026 <span>v1.0</span></div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="crumb"><span>NEU Academic Analytics</span><span class="crumb-arrow">/</span><strong id="crumb">Tổng quan</strong></div>
+      <div class="top-actions"><span class="top-private">● DỮ LIỆU NỘI BỘ</span><button id="openUpload" class="btn btn-outline">＋ Tải dữ liệu BTC</button></div>
+    </header>
+    <div id="globalProgress" class="progress" hidden><span class="spinner"></span><span id="progressText">Đang phân tích...</span></div>
+    <div id="toast" class="toast" hidden></div>
+    <div class="content" id="content">
+      <section id="page-overview" class="page visible">
+        <div class="page-head"><div><span class="eyebrow">SMART CAMPUS · FIT INNOVATION 2026</span><h1>Academic Intelligence Dashboard</h1><p>Phát hiện bất thường, hiệu chỉnh thận trọng và đánh giá năng lực học tập trên cùng một luồng dữ liệu.</p></div><button class="btn btn-primary" data-action="show-data">Phân tích dữ liệu <span>↗</span></button></div>
+        <div id="empty" class="empty-state"><div class="empty-glow">✳</div><h2>Bắt đầu với một bộ dữ liệu</h2><p>Tải <b>Du_lieu.csv</b> và tùy chọn <b>Thoi_khoa_bieu.csv</b>, hoặc chạy bộ dữ liệu giả lập để thử toàn bộ hệ thống.</p><div class="empty-buttons"><button class="btn btn-primary" data-action="show-data">Tải dữ liệu của BTC</button><button class="btn btn-outline" data-action="run-demo">Chạy dữ liệu giả lập</button></div><div class="empty-hint">Dữ liệu giả lập không chứa thông tin thật của BTC.</div></div>
+        <div id="overviewLoaded" hidden>
+          <div id="kpis" class="kpi-grid"></div>
+          <div class="analysis-track"><div><span>01</span><b>Detection</b><small>Thống kê phân tầng + ML</small></div><i>→</i><div><span>02</span><b>Remediation</b><small>Empirical Bayes</small></div><i>→</i><div><span>03</span><b>Classification</b><small>TCI + giải thích</small></div></div>
+          <div class="two-cols"><article class="panel"><div class="panel-head"><div><h3>Phân phối học lực: Before / After</h3><p>GPA quan sát trước và sau hiệu chỉnh</p></div><span class="pill neutral">Thang 0–4</span></div><div id="gpaChart" class="chart"></div></article><article class="panel"><div class="panel-head"><div><h3>Trạng thái lớp học phần</h3><p>Số lớp theo kết quả phân tích</p></div></div><div id="labelChart" class="chart"></div></article></div>
+          <article class="panel"><div class="panel-head"><div><h3>Các lớp cần ưu tiên xem xét</h3><p>Xếp theo Anomaly Score, không phải kết luận vi phạm</p></div><button class="text-link" data-action="show-anomalies">Xem tất cả →</button></div><div id="topAnomalies"></div></article>
+        </div>
+      </section>
+      <section id="page-anomalies" class="page">
+        <div class="page-head"><div><span class="eyebrow">GIẢI PHÁP 01</span><h1>Grade Anomaly Detection</h1><p>Phát hiện lớp đáng nghi bằng nhóm tham chiếu, dự báo điểm kỳ vọng và bốn tín hiệu thống kê.</p></div></div>
+        <div class="info-strip"><span class="info-icon">i</span><span><b>Anomaly Score ≠ xác suất gian lận.</b> Lớp có điểm cao có thể thực sự giỏi; kết quả là gợi ý ưu tiên kiểm tra, chưa phải kết luận.</span></div>
+        <div class="filter-row"><label>Loại bất thường <select id="anomalyLabel"><option value="ALL">Tất cả trạng thái</option><option value="HIGH_INFLATION">HIGH_INFLATION</option><option value="UNUSUALLY_STEEP">UNUSUALLY_STEEP</option><option value="SUSPICIOUS_DISTRIBUTION">SUSPICIOUS_DISTRIBUTION</option><option value="DATA_QUALITY_REVIEW">DATA_QUALITY_REVIEW</option><option value="NORMAL">NORMAL</option><option value="INSUFFICIENT_EVIDENCE">INSUFFICIENT_EVIDENCE</option></select></label><label>Mã môn <input id="anomalyCourse" placeholder="Ví dụ M057"></label><label>Năm học <select id="anomalyYear"><option value="">Tất cả năm học</option></select></label><button id="refreshAnomalies" class="btn btn-primary">Lọc dữ liệu</button></div>
+        <article class="panel"><div class="panel-head"><div><h3>Bảng xếp hạng lớp học phần</h3><p id="anomalyCount">Đang đợi dữ liệu</p></div><span class="pill neutral">Click vào một dòng để giải thích</span></div><div id="anomalyTable"></div></article>
+      </section>
+      <section id="page-adjustments" class="page">
+        <div class="page-head"><div><span class="eyebrow">GIẢI PHÁP 02</span><h1>Grade Adjustment Engine</h1><p>Ước lượng hiệu ứng lớp bằng Empirical Bayes, có cơ chế từ chối hiệu chỉnh nếu thiếu bằng chứng.</p></div><a class="btn btn-outline" href="/api/download/adjustments" target="_blank">↓ Xuất bảng điểm</a></div>
+        <div class="info-strip"><span class="info-icon">i</span><span><b>Chỉ số đề xuất, không sửa điểm chính thức.</b> Điểm 0 chưa rõ nguyên nhân được giữ nguyên; lớp nén phân phối chưa được tự động ánh xạ phân vị.</span></div>
+        <div id="adjustmentStats" class="mini-stats"></div>
+        <article class="panel"><div class="panel-head"><div><h3>Kết quả hiệu chỉnh theo lớp</h3><p>Chỉ tự tạo đề xuất khi độ lệch có hướng, bằng chứng đủ tốt và khoảng bất định cho phép.</p></div><span class="pill neutral">EB Shrinkage</span></div><div id="adjustmentTable"></div></article>
+      </section>
+      <section id="page-students" class="page">
+        <div class="page-head"><div><span class="eyebrow">GIẢI PHÁP 03</span><h1>True Competency Index</h1><p>Chỉ số GPA hiệu chỉnh trên các học phần quan sát được — không phải GPA chính thức toàn trường.</p></div><a class="btn btn-outline" href="/api/download/tci" target="_blank">↓ Xuất TCI</a></div>
+        <div id="studentStats" class="mini-stats"></div>
+        <div class="two-cols"><article class="panel"><div class="panel-head"><div><h3>Ma trận chuyển nhóm học lực</h3><p>Từ phân loại GPA gốc sang TCI</p></div></div><div id="transitionChart" class="chart"></div></article><article class="panel"><div class="panel-head"><div><h3>Cách phân loại TCI</h3><p>Ngưỡng được quy định trong đề bài</p></div></div><div class="tci-levels"><div><span class="level-indicator level-adv"></span><b>Advanced</b><small>TCI ≥ 3,60</small></div><div><span class="level-indicator level-prof"></span><b>Proficient</b><small>3,20 ≤ TCI &lt; 3,60</small></div><div><span class="level-indicator level-int"></span><b>Intermediate</b><small>2,50 ≤ TCI &lt; 3,20</small></div><div><span class="level-indicator level-risk"></span><b>At-Risk</b><small>TCI &lt; 2,50</small></div></div></article></div>
+        <div class="filter-row"><label>Tìm sinh viên <input id="studentSearch" placeholder="Mã sinh viên S00001"></label><label>Phân loại <select id="studentClass"><option value="ALL">Tất cả</option><option>ADVANCED</option><option>PROFICIENT</option><option>INTERMEDIATE</option><option>AT_RISK</option></select></label><label>Độ đầy đủ <select id="studentConfidence"><option value="ALL">Tất cả</option><option>OBSERVED_SCOPE</option><option>PROVISIONAL</option></select></label><button id="refreshStudents" class="btn btn-primary">Tìm kiếm</button></div>
+        <article class="panel"><div class="panel-head"><div><h3>Danh sách hồ sơ năng lực</h3><p id="studentCount">Đang đợi dữ liệu</p></div></div><div id="studentTable"></div></article>
+      </section>
+      <section id="page-experiments" class="page">
+        <div class="page-head"><div><span class="eyebrow">MÔ HÌNH & KIỂM CHỨNG</span><h1>Algorithm Diagnostics</h1><p>Đánh giá dự báo theo năm và mức độ đầy đủ của từng thành phần; không báo cáo Precision/F1 khi chưa có nhãn chuẩn.</p></div></div>
+        <div id="modelStats" class="mini-stats"></div>
+        <article class="panel"><div class="panel-head"><div><h3>MAE trên những năm chưa được dùng để huấn luyện</h3><p>Ridge và CatBoost; mô hình chọn cho năm hiện tại dựa trên sai số các năm trước</p></div><span class="pill neutral">Out-of-time</span></div><div id="maeChart" class="chart large"></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Nhật ký kiểm thử mô hình</h3><p>Điểm dự báo từ năm đầu không có dữ liệu quá khứ được đánh dấu thiếu bằng chứng.</p></div></div><div id="modelYearTable"></div></article>
+        <div class="method-grid"><div><span>01</span><h3>Statistical Anomaly</h3><p>So sánh cùng môn/kỳ/EP, dùng phần dư kỳ vọng, Beta–Binomial cho tỷ lệ A, Spearman và điểm KTTX–Thi.</p></div><div><span>02</span><h3>Empirical Bayes</h3><p>Dịch điểm có shrinkage, có khoảng bất định; chỉ tạo đề xuất khi đủ chứng cứ. Không dùng Anomaly Score làm số điểm trừ.</p></div><div><span>03</span><h3>TCI Explainability</h3><p>GPA có trọng số tín chỉ, tách nhãn PROVISIONAL và phân rã chính xác đóng góp từng học phần.</p></div></div>
+      </section>
+      <section id="page-data" class="page">
+        <div class="page-head"><div><span class="eyebrow">DỮ LIỆU & AN TOÀN</span><h1>Data Workspace</h1><p>Tải dữ liệu BTC trực tiếp vào ứng dụng đang chạy trên máy của bạn. Không tự gửi dữ liệu tới dịch vụ bên ngoài.</p></div></div>
+        <div class="two-cols upload-cols">
+          <article class="panel"><div class="panel-head"><div><h3>Khởi tạo một lần phân tích</h3><p>CSV UTF-8 BOM, đúng cột theo từ điển BTC</p></div></div>
+            <form id="uploadForm"><label class="upload-label" for="gradeFile"><div class="upload-ico">⇧</div><strong>Bảng điểm Du_lieu.csv</strong><span>Chọn tệp CSV bắt buộc</span><input type="file" id="gradeFile" accept=".csv,text/csv" required><small id="gradeFileName">Chưa chọn tệp</small></label><label class="upload-label optional" for="scheduleFile"><div class="upload-ico">▦</div><strong>Thoi_khoa_bieu.csv</strong><span>Tùy chọn · Không nối mã lớp trực tiếp</span><input type="file" id="scheduleFile" accept=".csv,text/csv"><small id="scheduleFileName">Chưa chọn tệp</small></label><button type="submit" class="btn btn-primary btn-wide">Bắt đầu phân tích 3 giải pháp <span>→</span></button></form>
+            <div class="demo-callout"><b>Chưa có dữ liệu hoặc chỉ muốn xem thử?</b><p>Bộ dữ liệu giả lập được tạo độc lập, có chủ đích cài các tình huống bất thường.</p><button id="demoBtn" class="btn btn-outline">Chạy dữ liệu giả lập</button></div>
+          </article>
+          <article class="panel"><div class="panel-head"><div><h3>Chất lượng dữ liệu</h3><p>Kiểm tra tự động sau mỗi lần tải tệp</p></div></div><div id="dataQuality" class="quality-list"><div class="muted-box">Chưa có dữ liệu phân tích.</div></div><div id="scheduleQuality"></div><div class="policy-note"><b>Giới hạn dữ liệu:</b> chỉ có kết quả từ các học phần BTC cung cấp, không đầy đủ điểm của mọi khoa; thiếu ngành, giảng viên, đề thi. Mọi dữ liệu thực phải được lưu giữ và sử dụng theo quy định của BTC.</div></article>
+        </div>
+      </section>
+    </div>
+    <footer class="footer"><span>NEU · FIT INNOVATION 2026</span><span>Academic analytics, not official academic decisions.</span></footer>
+  </main>
+</div>
+<div id="modal" class="modal" hidden><div class="modal-backdrop" id="closeBackdrop"></div><div class="modal-dialog"><button class="modal-close" id="closeModal">×</button><div id="modalBody"></div></div></div>
+</body></html>
